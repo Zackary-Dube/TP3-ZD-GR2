@@ -1,0 +1,120 @@
+# ===== Unity base =====
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+SysInfo.txt
+sysinfo.txt
+
+# ===== Auto-generated cache & artifacts =====
+*.pidb
+*.suo
+*.user
+*.userprefs
+*.csproj
+*.unityproj
+*.sln
+*.tmp
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+*.svd.meta
+*.opendb.meta
+*.VC.db.meta
+
+# ===== IDE-specific =====
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.bak
+
+# ===== OS-specific =====
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ===== Build outputs =====
+*.apk
+*.aab
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserdata/
+*.app
+*.exe
+*.appx
+*.ipa
+*.msix
+*.unitypackage
+*.zip
+
+# ===== Unity Cloud & Collaborate =====
+CollabSnapshot/
+.uvprojx
+.uvoptx
+
+# ===== Rider/JetBrains cache =====
+.idea/
+.gradle/
+*.iml
+out/
+
+# ===== Crash & profiler =====
+*.stacktrace
+*.iostat
+*.tuner
+*.prof
+*.hprof
+
+# ===== Addressables / AssetBundle cache =====
+/Assets/StreamingAssets/aa/
+*/AddressablesBuildData*/
+*/AddressableAssetsData/*/*.bin*
+/ServerData/
+
+# ===== Local dev artifacts =====
+*.local
+*.localhistory
+*.orig
+*.rej
+*.diff
+
+# ===== Generated lighting & NavMesh data =====
+/Assets/**/Lightmap-*.exr
+/Assets/**/LightmapSnapshot.asset
+/Assets/**/LightingData.asset
+/Assets/**/ReflectionProbe-*.exr
+/Assets/**/NavMesh.asset
+/Assets/**/OcclusionCullingData.asset
+
+# ===== Optional folders =====
+/Assets/AssetStoreTools*
+/Assets/Plugins/Editor/JetBrains*
+
+# ===== TextMeshPro generated data =====
+/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans*
+/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+
+# ===== Unity Build pipeline artifacts =====
+*/Builds/*
+/Builds/*
+/build/*
+/builds/*
+
+# ===== VS Code local settings =====
+.vscode/
+.vs
