@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class SceneNavigator : MonoBehaviour
 {
-//  Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    //  Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         GoToMenu();
     }
@@ -15,7 +16,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
 //  Ouvrir la scene du menu
     public static void GoToMenu() {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
 //  Ouvir la scene du jeu
@@ -26,5 +27,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 //  Fermer l'application
     public static void ExitApp() {
         Application.Quit();
-    }    
+    }
+    
 }

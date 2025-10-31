@@ -79,6 +79,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Text;
 using UnityEngine;
+
 [System.Serializable]
 public class GameSave {
     public int stageProgress;

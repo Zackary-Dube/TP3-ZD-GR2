@@ -1,8 +1,8 @@
+//using System.Diagnostics;
 using UnityEngine;
 
 public class GameSettingPanel : MonoBehaviour
 {
-    public PlayerPrefs player;
     public float volumeMusique;
     public bool OnOffParticules;
 
@@ -10,18 +10,20 @@ public class GameSettingPanel : MonoBehaviour
     //  Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     //  Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    public static float SoundVolume
-    {
+    public static float SoundVolume {
         get => PlayerPrefs.GetFloat("SoundVolume", defaultValue: 1f);
-        set => PlayerPrefs.SetFloat("SoundVolume", value);
+        set {
+            PlayerPrefs.SetFloat("SoundVolume", value);
+            PlayerPrefs.Save(); // pour sauvegarder immédiatement
+        }
     }
 }
