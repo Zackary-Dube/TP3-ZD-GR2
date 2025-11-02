@@ -82,9 +82,9 @@ using UnityEngine;
 
 [System.Serializable]
 public class GameSave {
-    public int stageProgress;
-    public float score;
-    public string lives;
+    public float difficulty;
+    public int score;
+    public int lives;
 }
 
 public class SaveSystem : MonoBehaviour {

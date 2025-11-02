@@ -413,13 +413,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774769966}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1643294142}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1834,9 +1834,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1643294140}
-        m_TargetAssemblyTypeName: SceneNavigator, Assembly-CSharp
-        m_MethodName: GoToMenu
+      - m_Target: {fileID: 1643294142}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2563,6 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca4a8fe5ae33d449b1583e001a04ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRate: 1
   targets:
   - {fileID: 4602456965013532137, guid: 3b147b509c7351646a2382d9109dd993, type: 3}
   - {fileID: 104231390521151222, guid: a24a27ce13c37db439f0195cd3e0da76, type: 3}
@@ -2576,7 +2577,6 @@ MonoBehaviour:
   - {fileID: 1395537594}
   gameIsActive: 1
   gameOverScreen: {fileID: 1247964890}
-  gamePauseScreen: {fileID: 1774769966}
   gameMusic: {fileID: 534669906}
 --- !u!4 &1569596945
 Transform:
@@ -2711,6 +2711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1643294141}
   - component: {fileID: 1643294140}
+  - component: {fileID: 1643294142}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -2725,7 +2726,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643294139}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c169d7917d979458feac3b98265a89, type: 3}
   m_Name: 
@@ -2745,6 +2746,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1643294142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643294139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746fd3bb1031fdf47922db6d02722b88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePauseScreen: {fileID: 1774769966}
 --- !u!1 &1774769966
 GameObject:
   m_ObjectHideFlags: 0
@@ -3021,13 +3035,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774769966}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1643294142}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3154,13 +3168,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1774769966}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1643294142}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
