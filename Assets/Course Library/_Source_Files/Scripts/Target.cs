@@ -1,56 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Target : MonoBehaviour
-{
-    private float minSpeed = 12;
-    private float maxSpeed = 16;
-    private float maxTorque = 10;
-
-    private float xRange = 4;
-    private float ySpawnPos = -2;
+public class Target : MonoBehaviour {
 
     public GameObject particle;
-
     public int scoreValue;
     public bool isBad = false;
 
+    private float minSpeed = 12;
+    private float maxSpeed = 16;
+    private float maxTorque = 10;
+    private float xRange = 4;
+    private float ySpawnPos = -2;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+/*
+    Start is called before the first frame update
+    Configure le mouvement et la position initiale de la cible lorsqu'elle est instanciee
+*/
+    void Start() {
         var rb = GetComponent<Rigidbody>();
-
         rb.AddForce(Vector3.up * Random.Range(minSpeed, maxSpeed), ForceMode.Impulse);
         rb.AddForce(Vector3.right * Random.Range(-maxSpeed, maxSpeed) / 12f, ForceMode.Impulse);
         rb.AddTorque(Random.Range(-maxTorque, maxTorque), Random.Range(-maxTorque, maxTorque), Random.Range(-maxTorque, maxTorque));
         transform.position = new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
         
-    //Called when Target is Clicked
+/*
+    Called when Target is Clicked
+    Gere le comportement lorsque la cibe est cliquee par le joueur
+*/
     private void OnMouseDown(){
-        //Debug.Log(GameSettingPanel.ParticlesEnabled);
-        if (GameSettingPanel.ParticlesEnabled)
-        {
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
+        if (Time.timeScale == 0f) {
+            return;
+        }
+        if (GameSettingPanel.ParticlesEnabled) {
             Instantiate(particle, transform.position, Quaternion.identity);
         }
-
-
-
-
-
         Destroy(gameObject);
-
-
-        if (isBad) GameManager.instance.UpdateLives(-1);
-        else GameManager.instance.UpdateScore(scoreValue);
+        if (isBad) {
+            GameManager.instance.UpdateLives(-1);
+        } else {
+           GameManager.instance.UpdateScore(scoreValue); 
+        } 
     }
 
-    //Called when Target reaches the bottom of the screen
+//  Called when Target reaches the bottom of the screen
     private void OnTriggerEnter(Collider other){
         Destroy(gameObject);
-
-        if(!isBad) GameManager.instance.UpdateLives(-1);
+        if(!isBad) {
+            GameManager.instance.UpdateLives(-1);
+        }
     }
 }

@@ -5,154 +5,127 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class GameManager : MonoBehaviour
-{
-    public float spawnRate = 1f;
-    public List<GameObject> targets;
-
-    public TextMeshProUGUI scoreText;
-
-    public int score = 0;
-    private int nLives = 3;
+public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
-
+    public List<GameObject> targets;
     public List<GameObject> lifeImages;
-
+    public GameObject gameOverScreen;
+    public AudioSource gameMusic;
+    public TextMeshProUGUI scoreText;
+    public float spawnRate = 1f;
+    public int score = 0;
     public bool gameIsActive = true;
 
-    public GameObject gameOverScreen;
-
-
-    public AudioSource gameMusic;
-
     private SaveSystem saveSystem;
+    private int nLives = 3;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameMusic = GameObject.Find("Audio").GetComponent<AudioSource>();
-
+/*
+    Start is called before the first frame update
+    Recupere la source audio
+    Demarre l'apparition des cibles
+    Affiche le score
+    Affiche les vie
+    Cache l'ecran de Game Over
+    Definit la difficulte depuis les parametres
+*/
+    void Start() {
+        if (!gameMusic && GameObject.Find("Audio")) {
+            gameMusic = GameObject.Find("Audio").GetComponent<AudioSource>();
+        }
         StartCoroutine(SpawnTargets());
-
-        instance = this;
-        Debug.Log("Game manager start");
-
         UpdateScore();
         UpdateLives();
         gameOverScreen.SetActive(false);
-
-        saveSystem = gameObject.AddComponent<SaveSystem>();
         spawnRate = GameSettingPanel.Difficulty;
     }
-    
-    private void Awake()
-    {
-        Debug.Log("GameManager awake");
-        if (instance == null)
+
+//  Update is called once per frame
+    void Update() {
+
+    }
+
+/*
+    Methode appelee avant Start
+    Definit l'instance globale du GameManager
+    Ajoute un composant SaveSystem
+*/
+    private void Awake() {
+        instance = this;
+        if (saveSystem == null)
         {
-            instance = this;
+            saveSystem = gameObject.AddComponent<SaveSystem>();
         }
     }
-    
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+//  Redemarre la scene actuelle 
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        Time.timeScale = 1f;
     }
 
-    public void GameOver()
-    {
+//  Termine la partie et affiche l'ecran de Game Over
+    public void GameOver() {
+        Time.timeScale = 0f;
         gameIsActive = false;
-
         gameOverScreen.SetActive(true);
     }
 
-    private void Update()
-    {
-/*
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetPause();
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Time.timeScale = 1f - Time.timeScale;
-        } 
-        */
-    }
-
-    
-
-    public void UpdateScore(int scoreToAdd = 0)
-    {
+//  Met a jour le score et rafraichit l'affichage
+    public void UpdateScore(int scoreToAdd = 0) {
         score += scoreToAdd;
-
         scoreText.text = $"Score: {score}";
     }
 
-    public void UpdateLives(int livesToAdd = 0)
-    {
+//  Met a jour le nombre de vies et l'affichage correspondant
+    public void UpdateLives(int livesToAdd = 0) {
         nLives += livesToAdd;
-
-        for(int i = 0; i < lifeImages.Count; i++)
-        {
+        for(int i = 0; i < lifeImages.Count; i++) {
             lifeImages[i].SetActive(i < nLives);
         }
-
-        if (nLives <= 0) GameOver();
+        if (nLives <= 0) {
+            GameOver();
+        }
     }
 
-    private IEnumerator SpawnTargets()
-    {
+//  Coroutine pour faire apparaitre des cibles a un rythme regulier
+    private IEnumerator SpawnTargets() {
         spawnRate = GameSettingPanel.Difficulty;
-
-
-        while (gameIsActive)
-        {
+        while (gameIsActive) {
             yield return new WaitForSeconds(1f / spawnRate);
             var index = Random.Range(0, targets.Count);
-
             Instantiate(targets[index]);
         }
     }
 
-
-    public void SaveGame()
-    {
-        GameSave saveData = new GameSave()
-        {
-            difficulty = spawnRate,
-            score = score,
-            lives = nLives
-        };
+//  Sauvegarde l'etat actuel du jeu (score, vies, difficulte)
+    public void SaveGame() {
+        if (saveSystem == null) {
+            Debug.LogError("SaveSystem non initialise !");
+            return;
+        }
+        GameSave saveData = new GameSave() {difficulty = spawnRate, score = score, lives = nLives};
         saveSystem.SaveGame(saveData);
     }
 
-    public void LoadGameFromGameManager()
-    {
-        Debug.Log("ici 1");
-        var loaded = saveSystem.LoadStateFromSave();
-        Debug.Log("ici 2");
-        spawnRate = loaded.difficulty;
-        score = loaded.score;
-        nLives = loaded.lives;
-        Debug.Log("difficulty : " + loaded.difficulty);
-        Debug.Log("score : " + loaded.score);
-
-        Debug.Log("lives : " + loaded.lives);
-        UpdateScore();
-        UpdateLives();
-
+//  Charge les donnees du jeu, soit depuis une sauvegarde, soit valeurs par defaut
+    public void LoadGameFromGameManager(bool fromSaveSystem = true) {
+        if(!fromSaveSystem) {
+            spawnRate = 1;
+            score = 0;
+            nLives = 3;
+        } else {
+            if (saveSystem == null) {
+                return;
+            }
+            var loaded = saveSystem.LoadStateFromSave();
+            if (loaded == null) {
+                return;
+            }
+            spawnRate = loaded.difficulty;
+            score = loaded.score;
+            nLives = loaded.lives;
+        }
+        Debug.Log($"Game charge : difficulty={spawnRate}, score={score}, lives={nLives}");
     }
-
-
-
-
-
-
-
 }

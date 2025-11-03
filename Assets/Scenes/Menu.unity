@@ -1287,8 +1287,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: NewMonoBehaviourScript, Assembly-CSharp
+      - m_Target: {fileID: 1330613820}
+        m_TargetAssemblyTypeName: SceneNavigator, Assembly-CSharp
         m_MethodName: ExitApp
         m_Mode: 1
         m_Arguments:
@@ -2318,11 +2318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1679e87a7027a5e40988fb9704b0d4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particuleToggle: {fileID: 2095882509}
-  volumeSlider: {fileID: 1008540599}
-  difficulty: {fileID: 1936442357}
   parameters: {fileID: 1503172187}
   menu: {fileID: 604147177}
+  volumeSlider: {fileID: 1008540599}
+  difficulty: {fileID: 1936442357}
+  particuleToggle: {fileID: 2095882509}
 --- !u!114 &1330613820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,10 +3742,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 66886918}
   m_HandleRect: {fileID: 864085252}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 2
+  m_MinValue: 1
+  m_MaxValue: 3
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
