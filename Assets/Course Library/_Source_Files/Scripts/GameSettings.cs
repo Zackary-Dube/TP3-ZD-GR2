@@ -11,7 +11,7 @@ public class GameSettings : MonoBehaviour {
     public Slider difficulty;
     public Toggle particuleToggle;
 
-    private AudioSource musicSource;
+    public AudioSource musicSource;
 
 /*
     Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,7 +21,16 @@ public class GameSettings : MonoBehaviour {
     Cache le panneau de parametre et affiche le menu
 */
     void Start() {
-        musicSource = GameObject.Find("Audio").GetComponent<AudioSource>();
+/*
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("Audio");
+        if (audios.Length > 1) {
+            Destroy(audios[1]); // ou Destroy(gameObject) selon le contexte
+        }
+        if (musicSource == null) {
+            musicSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
+        }
+*/
+        //musicSource = GameObject.Find("Audio").GetComponent<AudioSource>();
         volumeSlider.value = GameSettingPanel.SoundVolume;
         musicSource.volume = volumeSlider.value;
         particuleToggle.onValueChanged.AddListener(OnToggleParticules);
@@ -29,6 +38,22 @@ public class GameSettings : MonoBehaviour {
         parameters.SetActive(false);
 
         difficulty.value = GameSettingPanel.Difficulty;
+    }
+    // Methode qui permet de toujours juste avoir un audio source meme si on revient au menu
+    void Awake() {
+        GameObject[] audios = GameObject.FindGameObjectsWithTag("Audio");
+
+        if (audios.Length > 1) {
+            for (int i = 1; i < audios.Length; i++) {
+                Destroy(audios[i]);
+            }
+        }
+        if (audios.Length > 0) {
+            musicSource = audios[0].GetComponent<AudioSource>();
+            DontDestroyOnLoad(audios[0]);
+        } else {
+            Debug.LogError("Aucun GameObject Audio avec tag 'Audio' trouvé !");
+        }
     }
 
 //  Update is called once per frame
