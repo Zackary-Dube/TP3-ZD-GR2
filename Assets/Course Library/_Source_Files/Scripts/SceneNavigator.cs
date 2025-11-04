@@ -64,6 +64,10 @@ public class SceneNavigator : MonoBehaviour {
 
 //  Ferme l'application
     public static void ExitApp() {
+        #if UNITY_EDITOR
         UnityEditor.EditorApplication.ExitPlaymode();
+        #else
+        Application.Quit();
+        #endif
     }
 }
